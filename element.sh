@@ -38,7 +38,7 @@ else
  
   element=$($PSQL "SELECT name FROM elements WHERE atomic_number='$number'")
   sym=$($PSQL "SELECT symbol FROM elements WHERE atomic_number='$number'")
-  type=$($PSQL "SELECT type FROM properties WHERE atomic_number='$number'")
+  type=$($PSQL "SELECT type FROM types LEFT JOIN properties USING(type_id) WHERE atomic_number='$number'")
   mass=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number='$number'")
   mp=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number='$number'")
   bp=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number='$number'")
