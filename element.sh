@@ -13,7 +13,7 @@ atomic_number=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number='$
   fi
 fi
 
-if [[ $1 =~ ^[A-Z]$ ]]
+if [[ $1 =~ ^[A-Z][a-z]*$ ]]
 then
 symbol=$($PSQL "SELECT atomic_number FROM elements WHERE symbol='$1'")
   if [[ $symbol ]]
