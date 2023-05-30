@@ -34,5 +34,15 @@ fi
 if [[ -z $atomic_number && -z $symbol && -z $name ]]
 then
   echo I could not find that element in the database.
+else
+ 
+  element=$($PSQL "SELECT name FROM elements WHERE atomic_number='$number'")
+  sym=$($PSQL "SELECT symbol FROM elements WHERE atomic_number='$number'")
+  type=$($PSQL "SELECT type FROM properties WHERE atomic_number='$number'")
+  mass=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number='$number'")
+  mp=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number='$number'")
+  bp=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number='$number'")
+  echo "The element with atomic number $number is $element ($sym). It's a $type, with a mass of $mass amu. $element has a melting point of $mp celsius and a boiling point of $bp celsius."
+
 fi
 fi
